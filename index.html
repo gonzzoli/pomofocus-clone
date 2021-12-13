@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./res/styles.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+  <script defer src="./scripts/app.js" type="module"></script>
+  <title>Pomodoro</title>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <i class="fas fa-check-circle"></i>
+      <h3>Pomofocus</h3>
+    </div>
+    <div class="links">
+      <div class="link">
+        <i class="fas fa-chart-bar"></i>
+        <p>Reports</p>
+      </div>
+      <div class="link">
+        <i class="fas fa-cog"></i>
+        <p>Settings</p>
+      </div>
+      <div class="link">
+        <i class="fas fa-user-circle"></i>
+        <p>Profile</p>
+      </div>
+    </div>
+  </nav>
+  <div class="progress-bar">
+    <div class="inside-progress-bar"></div>
+  </div>
+  <section class="main">
+    <div class="timer">
+      <div class="session-type">
+        <p>Pomodoro</p>
+        <p>Short Break</p>
+        <p>Long Break</p>
+      </div>
+      <p id="time">25:00</p>
+      <p id="start-stop" data-on='false'>START</p>
+    </div>
+    <div class="current-task">
+      <p class="task-number">#2</p>
+      <p class="task-name">Something</p>
+    </div>
+    <div class="tasks">
+      <div class="tasks-heading">
+        <p>Tasks</p>
+        <i class="fas fa-ellipsis-v"></i>
+      </div>
+      <div class="add-task">
+        <i class="fas fa-plus-circle"></i>
+        <p>Add Task</p>
+      </div>
+      <div class="add-task-form">
+        <div class="top-container">
+          <input type="text" placeholder="What are you working on?" class="task-inp">
+          <div class="pomo-count">
+            <p>Est Pomodoros</p>
+            <div class="set-amount">
+              <input type="number" step="1" min="0" value="0" class="sessions-inp">
+              <i id="increase-pom" class="fas fa-caret-up"></i>
+              <i id="decrease-pom" class="fas fa-caret-down"></i>
+            </div>
+          </div>
+          <p class="add-note">+ Add Note</p>
+        </div>
+        <div class="bottom">
+            <p class="cancel-task">Cancel</p>
+            <p class="save-task" data-enabled='truse' >Save</p>
+        </div>
+      </div>
+      <div class="task completed">
+        <div class="left">
+          <i class="fas fa-check-circle"></i>
+          <p>something</p>
+        </div>
+        <div class="right">
+          <p class="num-pom">0/1</p>
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+      </div>
+      <div class="task">
+        <div class="left">
+          <i class="fas fa-check-circle"></i>
+          <p>something</p>
+        </div>
+        <div class="right">
+          <p class="num-pom">0/1</p>
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
