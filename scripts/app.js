@@ -183,6 +183,18 @@ function renderTask(task) {
   numPom.classList.add('num-pom')
   const options = document.createElement('i')
   options.classList.add('fas', 'fa-ellipsis-v')
+  const optionsList = document.createElement('div')
+  optionsList.classList.add('options')
+  const ul = document.createElement('ul')
+  const editOption = document.createElement('li')
+  const deleteOption = document.createElement('li')
+  const elseOption = document.createElement('li')
+  editOption.textContent = 'Edit'
+  deleteOption.textContent = 'Delete'
+  elseOption.textContent = 'Whatever'
+  ul.append(editOption, deleteOption, elseOption)
+  optionsList.append(ul)
+  options.append(optionsList)
 
   description.textContent = task.description
   numPom.textContent = `${task.completedPomodoros}/${task.pomodoros}`
@@ -193,10 +205,23 @@ function renderTask(task) {
   createdTask.addEventListener('click', selectTask)
   checkCircle.addEventListener('click', markAsCompleted)
   options.addEventListener('click', openOptionsPanel)
+  deleteOption.addEventListener('click', deleteTask)
+  editOption.addEventListener('click', editTask)
 
   function openOptionsPanel(e) {
     e.stopPropagation()
-    console.log('opened options ' + task.id)
+    optionsList.classList.toggle('open')
+  }
+  function deleteTask() {
+    tasksArray.splice(tasksArray.indexOf(task), 1)
+    renderTasks()
+  }
+  function editTask() {
+    openTaskForm()
+    console.log(tasksArray)
+    deleteTask()
+    newTaskInput.value = task.description
+    sessionsInput.value = task.pomodoros
   }
   function markAsCompleted(e) {
     e.stopPropagation()

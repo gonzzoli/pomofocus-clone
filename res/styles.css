@@ -204,6 +204,32 @@ nav .links .link i {
   border-radius: 7px;
 }
 
+.main .tasks-heading i .options {
+  position: absolute;
+  background: #e4e4e4dc;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  height: 0;
+  -webkit-transition: .15s ease-in-out;
+  transition: .15s ease-in-out;
+}
+
+.main .tasks-heading i .options ul {
+  list-style: none;
+}
+
+.main .tasks-heading i .options ul li {
+  padding: 8px 5px;
+  cursor: pointer;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+}
+
+.main .tasks-heading i .options ul li:hover {
+  color: gray;
+}
+
 .main .tasks-heading p {
   font-weight: 700;
   font-size: 18px;
@@ -239,32 +265,6 @@ nav .links .link i {
   margin-top: 5px;
   width: 80%;
   color: white;
-}
-
-.main .tasks .tasks-heading {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  border-bottom: 1px solid white;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-.main .tasks .tasks-heading i {
-  background: #eb7874;
-  padding: 10px 15px;
-  border-radius: 7px;
-}
-
-.main .tasks .tasks-heading p {
-  font-weight: 700;
-  font-size: 18px;
 }
 
 .main .task {
@@ -328,7 +328,7 @@ nav .links .link i {
       -ms-flex-align: center;
           align-items: center;
   margin-right: 20px;
-  opacity: 0.7;
+  opacity: 0.8;
   cursor: default;
 }
 
@@ -338,6 +338,41 @@ nav .links .link i {
   padding: 5px 9px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.main .task .right i .options {
+  position: absolute;
+  background: #e4e4e4;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  height: 0;
+  overflow: hidden;
+  display: none;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+
+.main .task .right i .options.open {
+  display: block;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.main .task .right i .options ul {
+  list-style: none;
+}
+
+.main .task .right i .options ul li {
+  padding: 8px 5px;
+  cursor: pointer;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+}
+
+.main .task .right i .options ul li:hover {
+  color: gray;
 }
 
 .main .task.completed {
