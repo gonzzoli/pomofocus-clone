@@ -281,6 +281,17 @@ nav .links .link i {
   border-radius: 7px;
   font-weight: 700;
   font-size: 17px;
+  cursor: pointer;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+
+.main .task:hover {
+  background: #f0efef;
+}
+
+.main .task.selected {
+  border-left: 5px solid black;
 }
 
 .main .task .left {
@@ -297,6 +308,12 @@ nav .links .link i {
   margin-right: 10px;
   font-size: 20px;
   color: grey;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+}
+
+.main .task .left i:hover {
+  color: #db9491;
 }
 
 .main .task .right {
@@ -308,6 +325,7 @@ nav .links .link i {
           align-items: center;
   margin-right: 20px;
   opacity: 0.7;
+  cursor: default;
 }
 
 .main .task .right i {

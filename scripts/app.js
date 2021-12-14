@@ -4,7 +4,8 @@ const sessionModes = Array.from(document.querySelector('.session-type').children
 let currentMode = 'pomodoro'
 const time = document.querySelector('#time')
 const startStopButton = document.querySelector('#start-stop')
-const currentTask = document.querySelector('.current-task')
+//as an array so we get the number and descr tag separately
+const currentTask = Array.from(document.querySelector('.current-task').children)
 const addTask = document.querySelector('.add-task')
 const addTaskForm = document.querySelector('.add-task-form')
 const newTaskInput = document.querySelector('.task-inp')
@@ -14,7 +15,6 @@ const decSession = document.querySelector('#decrease-pom')
 const cancelAddTask = document.querySelector('.cancel-task')
 const saveTask = document.querySelector('.save-task')
 const tasksList = document.querySelector('.tasks')
-
 
 let minutes = 25
 let seconds = 0
@@ -158,6 +158,7 @@ function submitTaskForm() {
 }
 function renderTask(task) {
   const createdTask = document.createElement('div')
+  if(task.isSelected) createdTask.classList.add('selected')
   createdTask.classList.add('task')
   const left = document.createElement('div')
   left.classList.add('left')
@@ -172,31 +173,60 @@ function renderTask(task) {
   options.classList.add('fas', 'fa-ellipsis-v')
 
   description.textContent = task.description
-  numPom.textContent = `0/${task.pomodoros}`
+  numPom.textContent = `${task.completedPomodoros}/${task.pomodoros}`
   left.append(checkCircle, description)
   right.append(numPom, options)
   createdTask.append(left, right)
   tasksList.append(createdTask)
+
+  createdTask.addEventListener('click', selectTask)
+  checkCircle.addEventListener('click', markAsCompleted)
+  options.addEventListener('click', openOptionsPanel)
+
+  function openOptionsPanel(e) {
+    e.stopPropagation()
+    console.log('opened options ' + task.id)
+  }
+  function markAsCompleted(e) {
+    e.stopPropagation()
+    console.log('marked completed ' +task.id)
+  }
+  function selectTask() {
+    tasksArray.forEach(child => child.isSelected = false)
+    task.isSelected = true
+    console.log(tasksArray)
+    setSelectedTask(task)
+  }
 }
+function setSelectedTask(task) {
+  currentTask[0].textContent = `#${task.id}`
+  currentTask[1].textContent = task.description
+  renderTasks()
+}
+
 function renderTasks() {
   Array.from(tasksList.children).forEach(task => tasksList.removeChild(task))
   tasksArray.forEach(task => renderTask(task))
 }
+
 function createNewTask() {
-  const newId = Math.max(...tasksArray.map(task => task.id)) + 1
+  const newId = Math.max(0, ...tasksArray.map(task => task.id)) + 1
   const description = newTaskInput.value
   const pomodoros = Number(sessionsInput.value)
   const task = new Task(description, pomodoros, newId)
   tasksArray.push(task)
   renderTasks()
 }
+
 let tasksArray = []
 class Task {
   constructor(description, pomodoros, id) {
     this.description = description
     this.pomodoros = pomodoros
+    this.completedPomodoros = 0
     this.completed = false
     this.id = id
+    this.isSelected = false
   }
 }
 
