@@ -20,7 +20,9 @@ let minutes = 25
 let seconds = 0
 
 function pomodoroMode() {
-  sessionModes[0].style.background = '#df7977'
+  document.body.style.background = '#D95550'
+  document.documentElement.style.background = '#D95550'
+  sessionModes[0].style.background = '#c0bbbb3f'
   sessionModes[1].style.background = 'none'
   sessionModes[2].style.background = 'none'
   minutes = 25
@@ -35,8 +37,10 @@ function pomodoroMode() {
   updateTimer()
 }
 function shortBreakMode() {
+  document.body.style.background = '#4C9195'
+  document.documentElement.style.background = '#4C9195'
   sessionModes[0].style.background = 'none'
-  sessionModes[1].style.background = '#df7977'
+  sessionModes[1].style.background = '#c0bbbb3f'
   sessionModes[2].style.background = 'none'
   minutes = 5
   seconds = 0
@@ -50,9 +54,11 @@ function shortBreakMode() {
   updateTimer()
 }
 function longBreakMode() {
+  document.body.style.background = '#457CA3'
+  document.documentElement.style.background = '#457CA3'
   sessionModes[0].style.background = 'none'
   sessionModes[1].style.background = 'none'
-  sessionModes[2].style.background = '#df7977'
+  sessionModes[2].style.background = '#c0bbbb3f'
   minutes = 10
   seconds = 0
   startStopButton.dataset.on = 'false'
@@ -75,7 +81,7 @@ function toggleTimer() {
   if(startStopButton.dataset.on == 'false') {
     startStopButton.dataset.on = 'true'
     startStopButton.textContent = 'STOP'
-    startStopButton.style.background = '#df5550'
+    startStopButton.style.background = 'rgb(200,200,200,0.2)'
     startStopButton.style.color = 'white'
   } else {
     startStopButton.dataset.on = 'false'
@@ -93,7 +99,10 @@ setInterval(() => {
     updateTimer()
     seconds = 59
     if(minutes == 0) {
-      console.log('you made it')
+      tasksArray.forEach(task => {
+        if(task.isSelected) task.completedPomodoros++
+      })
+      renderTasks()
     }
   }
   updateTimer()
@@ -103,7 +112,7 @@ setInterval(() => {
   progressBar.style.width = `${progressWidth}%`
   seconds--
   
-}, 100)
+}, 1)
 
 {
 sessionModes[0].addEventListener('click', pomodoroMode)
@@ -201,6 +210,9 @@ function renderTask(task) {
 function setSelectedTask(task) {
   currentTask[0].textContent = `#${task.id}`
   currentTask[1].textContent = task.description
+  if(currentMode == 'pomodoro') pomodoroMode()
+  if(currentMode == 'short-break') shortBreakMode()
+  if(currentMode == 'long-break') longBreakMode()
   renderTasks()
 }
 

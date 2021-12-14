@@ -8,12 +8,16 @@
 
 html {
   background: #d95550;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
 }
 
 body {
   width: 70vw;
   margin: auto;
-  height: 1000px;
+  height: 900px;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
 }
 
 nav {
@@ -71,7 +75,7 @@ nav .links .link {
   padding: 5px 9px;
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
-  background: #dd7977;
+  background: #ada5a450;
   border-radius: 5px;
 }
 
@@ -86,7 +90,7 @@ nav .links .link i {
 .progress-bar {
   width: 100%;
   height: 2px;
-  background: #aa4a4a;
+  background: rgba(153, 144, 144, 0.603);
 }
 
 .progress-bar .inside-progress-bar {
@@ -111,7 +115,7 @@ nav .links .link i {
 
 .main .timer {
   width: 80%;
-  background: #dd6662;
+  background: #c7c4c452;
   color: white;
   border-radius: 6px;
   padding: 15px;
@@ -154,7 +158,7 @@ nav .links .link i {
   width: 140px;
   background: white;
   color: #d95550;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.418);
   display: inline-block;
   border-radius: 5px;
   font-weight: 800;
@@ -195,7 +199,7 @@ nav .links .link i {
 }
 
 .main .tasks-heading i {
-  background: #eb7874;
+  background: #b6afaf59;
   padding: 10px 15px;
   border-radius: 7px;
 }
@@ -206,7 +210,7 @@ nav .links .link i {
 }
 
 .main .add-task {
-  background: #c34c48;
+  background: #bbbbbb5b;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
