@@ -177,8 +177,62 @@ nav .links .link i {
   color: white;
 }
 
+.main .tasks-heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid white;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  color: white;
+  width: 80%;
+}
+
+.main .tasks-heading i {
+  background: #eb7874;
+  padding: 10px 15px;
+  border-radius: 7px;
+}
+
+.main .tasks-heading p {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.main .add-task {
+  background: #c34c48;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #e0cecd;
+  font-weight: 700;
+  height: 70px;
+  border-radius: 7px;
+  border: 2px #db9491 dashed;
+  margin-bottom: 20px;
+  cursor: pointer;
+  width: 80%;
+}
+
+.main .add-task i {
+  margin-right: 7px;
+}
+
 .main .tasks {
-  margin-top: 15px;
+  margin-top: 5px;
   width: 80%;
   color: white;
 }
@@ -207,31 +261,6 @@ nav .links .link i {
 .main .tasks .tasks-heading p {
   font-weight: 700;
   font-size: 18px;
-}
-
-.main .tasks .add-task {
-  background: #c34c48;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  color: #e0cecd;
-  font-weight: 700;
-  height: 70px;
-  border-radius: 7px;
-  border: 2px #db9491 dashed;
-  margin-bottom: 20px;
-  cursor: pointer;
-}
-
-.main .tasks .add-task i {
-  margin-right: 7px;
 }
 
 .main .task {
@@ -298,7 +327,7 @@ nav .links .link i {
 }
 
 .main .add-task-form {
-  width: 100%;
+  width: 80%;
   height: 0;
   overflow: hidden;
   background: white;

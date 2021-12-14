@@ -15,8 +15,10 @@ const cancelAddTask = document.querySelector('.cancel-task')
 const saveTask = document.querySelector('.save-task')
 const tasksList = document.querySelector('.tasks')
 
+
 let minutes = 25
 let seconds = 0
+
 function pomodoroMode() {
   sessionModes[0].style.background = '#df7977'
   sessionModes[1].style.background = 'none'
@@ -111,9 +113,13 @@ startStopButton.addEventListener('click', toggleTimer)
 addTask.addEventListener('click', openTaskForm)
 incSession.addEventListener('click', () => {
   sessionsInput.value++
+  checkInput()
 })
 decSession.addEventListener('click', () => {
-  if(sessionsInput.value > 0) sessionsInput.value--
+  if(sessionsInput.value > 0) {
+    sessionsInput.value--
+    checkInput()
+  }
 })
 }
 cancelAddTask.addEventListener('click', cancelTaskForm)
@@ -122,7 +128,7 @@ newTaskInput.addEventListener('keydown', checkInput)
 function checkInput() {
   // brief timeout to allow the input value to update
   setTimeout(() => {
-    if(newTaskInput.value.trim() != '') {
+    if(newTaskInput.value.trim() != '' && Number(sessionsInput.value) > 0) {
       saveTask.addEventListener('click', submitTaskForm)
       saveTask.style.background = 'black'
       return
@@ -132,7 +138,6 @@ function checkInput() {
     }
   }, 5)
 }
-
 function cancelTaskForm() {
   addTaskForm.style.height = '70px'
   addTaskForm.style.opacity = '0'
@@ -146,13 +151,12 @@ function cancelTaskForm() {
   }, 190)
 
 }
-
 function submitTaskForm() {
   createNewTask()
   //clears the input and closes the window
   cancelTaskForm()
 }
-function createNewTask() {
+function renderTask(task) {
   const createdTask = document.createElement('div')
   createdTask.classList.add('task')
   const left = document.createElement('div')
@@ -167,13 +171,35 @@ function createNewTask() {
   const options = document.createElement('i')
   options.classList.add('fas', 'fa-ellipsis-v')
 
-  description.textContent = newTaskInput.value
-  numPom.textContent = `0/${sessionsInput.value}`
+  description.textContent = task.description
+  numPom.textContent = `0/${task.pomodoros}`
   left.append(checkCircle, description)
   right.append(numPom, options)
   createdTask.append(left, right)
   tasksList.append(createdTask)
 }
+function renderTasks() {
+  Array.from(tasksList.children).forEach(task => tasksList.removeChild(task))
+  tasksArray.forEach(task => renderTask(task))
+}
+function createNewTask() {
+  const newId = Math.max(...tasksArray.map(task => task.id)) + 1
+  const description = newTaskInput.value
+  const pomodoros = Number(sessionsInput.value)
+  const task = new Task(description, pomodoros, newId)
+  tasksArray.push(task)
+  renderTasks()
+}
+let tasksArray = []
+class Task {
+  constructor(description, pomodoros, id) {
+    this.description = description
+    this.pomodoros = pomodoros
+    this.completed = false
+    this.id = id
+  }
+}
+
 function openTaskForm() {
   addTask.style.display = 'none'
   addTaskForm.style.display = 'block'
