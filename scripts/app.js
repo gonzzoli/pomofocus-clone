@@ -100,8 +100,10 @@ setInterval(() => {
     seconds = 59
     if(minutes == 0) {
       tasksArray.forEach(task => {
-        if(task.isSelected) task.completedPomodoros++
+        if(task.isSelected && currentMode == 'pomodoro') task.completedPomodoros++
       })
+      if(currentMode == 'pomodoro') shortBreakMode()
+      else if(currentMode == 'short-break' || currentMode == 'long-break') pomodoroMode() 
       renderTasks()
     }
   }
@@ -168,6 +170,7 @@ function submitTaskForm() {
 function renderTask(task) {
   const createdTask = document.createElement('div')
   if(task.isSelected) createdTask.classList.add('selected')
+  if(task.completed) createdTask.classList.add('completed')
   createdTask.classList.add('task')
   const left = document.createElement('div')
   left.classList.add('left')
@@ -187,7 +190,6 @@ function renderTask(task) {
   right.append(numPom, options)
   createdTask.append(left, right)
   tasksList.append(createdTask)
-
   createdTask.addEventListener('click', selectTask)
   checkCircle.addEventListener('click', markAsCompleted)
   options.addEventListener('click', openOptionsPanel)
@@ -198,12 +200,12 @@ function renderTask(task) {
   }
   function markAsCompleted(e) {
     e.stopPropagation()
-    console.log('marked completed ' +task.id)
+    task.markedCompleted = !task.markedCompleted
+    renderTasks()
   }
   function selectTask() {
     tasksArray.forEach(child => child.isSelected = false)
     task.isSelected = true
-    console.log(tasksArray)
     setSelectedTask(task)
   }
 }
@@ -218,7 +220,14 @@ function setSelectedTask(task) {
 
 function renderTasks() {
   Array.from(tasksList.children).forEach(task => tasksList.removeChild(task))
-  tasksArray.forEach(task => renderTask(task))
+  tasksArray.forEach(task => {
+    if(task.pomodoros == task.completedPomodoros || task.markedCompleted) {
+      task.completed = true
+    }else {
+      task.completed = false
+    }
+    renderTask(task)
+  })
 }
 
 function createNewTask() {
@@ -237,6 +246,7 @@ class Task {
     this.pomodoros = pomodoros
     this.completedPomodoros = 0
     this.completed = false
+    this.markedCompleted = false
     this.id = id
     this.isSelected = false
   }

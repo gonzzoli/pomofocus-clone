@@ -341,7 +341,8 @@ nav .links .link i {
 }
 
 .main .task.completed {
-  color: gray;
+  color: #afafaf;
+  background: rgba(105, 105, 105, 0.658);
 }
 
 .main .task.completed .left p {
